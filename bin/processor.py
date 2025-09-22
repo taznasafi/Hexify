@@ -39,6 +39,9 @@ class CSVProcessor:
     def save_gdf(self, output_layer_name):
         if self.gdf is not None:
             self.gpkg_output_path = os.path.join(GPK_OUTPUT, f"{output_layer_name}.gpkg")
-            self.gdf.to_file(self.gpkg_output_path, layer_name = output_layer_name)
+            try:
+                self.gdf.to_file(self.gpkg_output_path, layer_name=output_layer_name)
+            except:
+                self.gdf.to_file(self.gpkg_output_path, layer=output_layer_name)
         else:
             raise ValueError("No data to save.")
