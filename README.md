@@ -30,7 +30,7 @@
 ## Installation
 
 ### 1. Download Hexify
-Pull Guss repository or download and extract the zip folder to your desired project directory
+Pull Hexify repository or download and extract the zip folder to your desired project directory
 
 ### 2. Create a Virtual Environment
 Navigate to your project directory in your terminal. Then, run the following command to create a new virtual environment:
@@ -71,7 +71,7 @@ pip install -r requirements.txt
 Navigate to the project directory and run:
 
 ```bash
-python app.py
+python main.py
 ```
 
 This will launch the **Hexify GUI**.
