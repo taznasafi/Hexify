@@ -1,6 +1,4 @@
 import tkinter as tk
-from tkinter import filedialog, messagebox
-from bin.processor import CSVProcessor
 from hexify.Hexify import HexyAPP
 
 
