@@ -1,5 +1,5 @@
 
-# 🧭 Hexify: Hex ID to GIS
+# 🧭 Hexify
 
 **Hexify** is a simple GUI-based Python application that converts a CSV file containing H3 hexagon IDs into a GIS-compatible GeoPackage file. It allows users to specify the hex ID column and output layer name, and handles the geometry creation and file export automatically.
 
