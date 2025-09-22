@@ -22,7 +22,7 @@
 - Python 3.8+
 - `pandas`
 - `geopandas`
-- `h3`
+- `h3==3.7.6`
 
 ---
 
