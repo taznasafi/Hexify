@@ -1,7 +1,4 @@
 requests
 geopandas
-pyogrio
 pandas
-python-dotenv
 h3
-pyarrow

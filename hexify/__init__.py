@@ -6,14 +6,6 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-if not Path.exists(BASE_DIR / 'config' / '.env'):
-    raise Exception(
-        "Hi it's me GUSS, I did not find .env file in the root directory, please add .env file with your credentials!")
-else:
-    from dotenv import load_dotenv
-
-    load_dotenv(BASE_DIR / "config" / '.env')
-
 DATA_DIR = BASE_DIR / "data"
 DATA_INPUT =  DATA_DIR/"input"
 DATA_OUTPUT = DATA_DIR / "output"
