@@ -1,4 +1,3 @@
-tkinter
 geopandas
 pandas
 h3

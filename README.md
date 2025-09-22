@@ -20,7 +20,6 @@
 ## 📦 Requirements
 
 - Python 3.8+
-- `tkinter`
 - `pandas`
 - `geopandas`
 - `h3`
