@@ -88,7 +88,7 @@ This will launch the **Hexify GUI**.
 A progress dialog will appear showing the current status of the operation.
 
 ---
-
+ 
 ## 📤 Output
 
 - The output will be saved as a `.gpkg` (GeoPackage) file.
