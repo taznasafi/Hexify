@@ -5,7 +5,11 @@ import h3
 from shapely.geometry import Polygon
 from hexify import GPK_OUTPUT
 import os
+import re
 
+
+def name_fixer(value):
+    return re.sub(r"\W", "_", value)
 
 
 class CSVProcessor:
@@ -14,7 +18,7 @@ class CSVProcessor:
         self.df = None
         self.gdf = None
         self.gpkg_output_path = None
-        self.output_layer_name = os.path.basename(self.input_path).replace(".csv", "")
+        self.output_layer_name = name_fixer(os.path.basename(self.input_path))
 
     def load_csv(self):
         self.df = pd.read_csv(self.input_path)
@@ -35,13 +39,12 @@ class CSVProcessor:
 
         self.gdf = gp.GeoDataFrame(self.df, geometry='geometry', crs=4326)
 
-
     def save_gdf(self, output_layer_name):
         if self.gdf is not None:
             self.gpkg_output_path = os.path.join(GPK_OUTPUT, f"{output_layer_name}.gpkg")
             try:
                 self.gdf.to_file(self.gpkg_output_path, layer_name=output_layer_name)
-            except:
-                self.gdf.to_file(self.gpkg_output_path, layer=output_layer_name)
+            except Exception as e:
+                raise ValueError(e)
         else:
             raise ValueError("No data to save.")

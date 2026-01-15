@@ -45,9 +45,9 @@ class HexyAPP:
         # hex_id_col Name
         tk.Label(self.root, text="Hex ID Column Name:").grid(row=1, column=0, pady=10)
         tk.Entry(self.root, textvariable=self.hex_id_col_name, width=50).grid(row=1, column=1, padx=10)
-        # Output layer name
-        tk.Label(self.root, text="Output Layer Name:").grid(row=2, column=0, pady=10)
-        tk.Entry(self.root, textvariable=self.output_layer_name, width=50).grid(row=2, column=1, padx=10)
+        # # Output layer name
+        # tk.Label(self.root, text="Output Layer Name:").grid(row=2, column=0, pady=10)
+        # tk.Entry(self.root, textvariable=self.output_layer_name, width=50).grid(row=2, column=1, padx=10)
         # submit button
         tk.Button(self.root, text="Process and Save", command=self.process_file).grid(row=3, column=1, pady=20)
 
@@ -60,7 +60,7 @@ class HexyAPP:
     def process_file(self):
         input_file = self.input_path.get()
         hex_id = self.hex_id_col_name.get()
-        output_layer_name = self.output_layer_name.get()
+        # output_layer_name = self.output_layer_name.get()
         if not input_file:
             messagebox.showerror("Error", "Please select a CSV file.")
             return
@@ -69,9 +69,9 @@ class HexyAPP:
             messagebox.showerror("Error", "Please type Hex id Column Name")
             return
 
-        if not output_layer_name:
-            messagebox.showerror("Error", "Please assign layer name")
-            return
+        # if not output_layer_name:
+        #     messagebox.showerror("Error", "Please assign layer name")
+        #     return
 
         dialog = ProcessingDialog(self.root, message="Starting....")
 
