@@ -81,7 +81,6 @@ This will launch the **Hexify GUI**.
 
 1. **Browse**: Select your input CSV file.
 2. **Hex ID Column Name**: Enter the name of the column in your CSV that contains H3 hex IDs (e.g., `hex_id`).
-3. **Output Layer Name**: Enter the desired name for the output GIS layer.
 4. **Process and Save**: Click the button to generate and save the GeoPackage file.
 
 A progress dialog will appear showing the current status of the operation.
