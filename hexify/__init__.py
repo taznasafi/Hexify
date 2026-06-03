@@ -1,9 +1,14 @@
 from pathlib import Path
-import ast
 import os
+import sys
 
+if getattr(sys, 'frozen', False):
+    # Running as an executable (frozen app like PyInstaller)
+    BASE_DIR = Path(os.path.dirname(sys.executable)).resolve()
+else:
+    # Running as a .py script
+    BASE_DIR = Path(__file__).resolve().parent.parent
 
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 DATA_DIR = BASE_DIR / "data"

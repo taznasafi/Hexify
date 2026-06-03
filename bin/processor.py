@@ -7,19 +7,22 @@ from shapely.geometry import Polygon
 from hexify import GPK_OUTPUT
 import os
 import re
-
+from hexify import Hexify
 
 def name_fixer(value):
     return re.sub(r"\W", "_", value)
 
 
 class CSVProcessor:
-    def __init__(self, input_path):
+    def __init__(self, input_path, gpkg_output_path=GPK_OUTPUT):
         self.input_path = input_path
         self.df = None
         self.gdf = None
-        self.gpkg_output_path = None
+        self.gpkg_output_path = gpkg_output_path
         self.output_layer_name = name_fixer(os.path.basename(self.input_path))
+
+    def set_output_path(self, output_path):
+        self.gpkg_output_path = output_path
 
     def load_csv(self):
         self.df = pd.read_csv(self.input_path)
@@ -42,7 +45,7 @@ class CSVProcessor:
 
     def save_gdf(self, output_layer_name):
         if self.gdf is not None:
-            self.gpkg_output_path = os.path.join(GPK_OUTPUT, f"{output_layer_name}.gpkg")
+            self.gpkg_output_path = os.path.join(self.gpkg_output_path, f"{output_layer_name}.gpkg")
             try:
                 self.gdf.to_file(self.gpkg_output_path, layer=output_layer_name)
             except Exception as e:
