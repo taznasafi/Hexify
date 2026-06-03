@@ -3,3 +3,7 @@
 /.gitignore
 /data/
 /__pychache__/
+/Hexify.spec
+/dist/
+/assets/
+/build/

@@ -1,6 +1,7 @@
 import os.path
 import pandas as pd
 import geopandas as gp
+gp.options.io_engine = "pyogrio"
 import h3
 from shapely.geometry import Polygon
 from hexify import GPK_OUTPUT
@@ -24,7 +25,7 @@ class CSVProcessor:
         self.df = pd.read_csv(self.input_path)
 
     def polygonize(self, hex_id):
-        coords = h3.h3_to_geo_boundary(hex_id)
+        coords = h3.cell_to_boundary(hex_id)
         flipped = tuple(coord[::-1] for coord in coords)
         return Polygon(flipped)
 
@@ -43,7 +44,7 @@ class CSVProcessor:
         if self.gdf is not None:
             self.gpkg_output_path = os.path.join(GPK_OUTPUT, f"{output_layer_name}.gpkg")
             try:
-                self.gdf.to_file(self.gpkg_output_path, layer_name=output_layer_name)
+                self.gdf.to_file(self.gpkg_output_path, layer=output_layer_name)
             except Exception as e:
                 raise ValueError(e)
         else:
