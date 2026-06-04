@@ -1,16 +1,36 @@
 import os.path
-import pandas as pd
+
 import geopandas as gp
+import pandas as pd
+
 gp.options.io_engine = "pyogrio"
 import h3
 from shapely.geometry import Polygon
 from hexify import GPK_OUTPUT
 import os
 import re
-from hexify import Hexify
+import charset_normalizer
+
 
 def name_fixer(value):
     return re.sub(r"\W", "_", value)
+
+def detect_csv_encoding(file_path: str) -> str:
+    """
+    Detects the character encoding of a CSV file.
+    Falls back to 'utf-8' if detection fails.
+    """
+    try:
+        # Read the file in binary mode
+        with open(file_path, 'rb') as f:
+            # Analyze a sample (first 50,000 bytes) to save memory
+            sample = f.read(50000)
+            # Perform detection
+        result = charset_normalizer.from_bytes(sample).best()
+        # Return detected encoding name, or fallback
+        return result.encoding if result else 'utf-8'
+    except Exception:
+        return 'utf-8'
 
 
 class CSVProcessor:
@@ -20,12 +40,13 @@ class CSVProcessor:
         self.gdf = None
         self.gpkg_output_path = gpkg_output_path
         self.output_layer_name = name_fixer(os.path.basename(self.input_path))
+        self.input_encoding = detect_csv_encoding(self.input_path)
 
     def set_output_path(self, output_path):
         self.gpkg_output_path = output_path
 
     def load_csv(self):
-        self.df = pd.read_csv(self.input_path)
+        self.df = pd.read_csv(self.input_path, encoding=self.input_encoding)
 
     def polygonize(self, hex_id):
         coords = h3.cell_to_boundary(hex_id)
